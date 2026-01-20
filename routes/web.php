@@ -13,16 +13,19 @@ Route::get('/students', function () {
 });
 
 // Add Student Page
+// CRITICAL: This MUST come before the '/students/{id}' route.
+// Otherwise, Laravel will think "create" is an ID!
 Route::get('/students/create', function () {
     return view('students.create');
 });
 
-// View Student Page (ID is a placeholder here for simulation)
+// View Student Page
 Route::get('/students/{id}', function ($id) {
-    return view('students.show');
+    // We pass the $id variable to the view so we can display it
+    return view('students.show', ['id' => $id]);
 });
 
 // Edit Student Page
 Route::get('/students/{id}/edit', function ($id) {
-    return view('students.edit');
+    return view('students.edit', ['id' => $id]);
 });
